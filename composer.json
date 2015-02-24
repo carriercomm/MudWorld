@@ -1,0 +1,25 @@
+{
+    "name": "Donald/MudWorld",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Donald Zhan",
+            "email": "donald.zhan1984@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/event-dispatcher": "~2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "MudWorld\\": "src",
+            "MudWorld\\Core\\" : "src/core",
+            "MudWorld\\Event\\": "src/event",
+            "MudWorld\\Test\\": "test"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.3.3"
+    }
+}
