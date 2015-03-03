@@ -1,5 +1,4 @@
 <?php
-
 namespace MudWorld\Test;
 
 use MudWorld\Person;

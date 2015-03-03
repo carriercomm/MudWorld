@@ -1,5 +1,4 @@
 <?php
-
 namespace MudWorld;
 
 use MudWorld\Core\MudObject;

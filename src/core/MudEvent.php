@@ -1,5 +1,4 @@
 <?php
-
 namespace MudWorld\Core;
 
 use Symfony\Component\EventDispatcher\Event;
