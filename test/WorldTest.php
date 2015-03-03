@@ -1,20 +1,17 @@
 <?php
 namespace MudWorld\Test;
 
-use MudWorld\Core\MudEvent;
 use MudWorld\Core\MudObject;
-use MudWorld\Event\WorldRunEvent;
 use MudWorld\Person;
 use MudWorld\World;
 use PHPUnit_Framework_TestCase;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class WorldTest extends PHPUnit_Framework_TestCase
 {
 
     private function _makeWorld()
     {
-        return new World(new EventDispatcher());
+        return new World();
     }
 
     private function _makeObject()
@@ -22,15 +19,6 @@ class WorldTest extends PHPUnit_Framework_TestCase
         return new MudObject();
     }
 
-    private function _makeEvnet()
-    {
-        return new MudEvent();
-    }
-
-    private function _makeWorldRunEvent()
-    {
-        return new WorldRunEvent();
-    }
     private function _makePerson()
     {
         return new Person();
@@ -43,16 +31,6 @@ class WorldTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('MudWorld\World', $world);
     }
 
-    public function testAddObjectReturnTrue()
-    {
-        $world = $this->_makeWorld();
-
-        $object = $this->_makeObject();
-        $result = $world->add($object);
-
-        $this->assertTrue($result);
-    }
-
     public function testAddObjectReturnFalse()
     {
 
@@ -60,7 +38,7 @@ class WorldTest extends PHPUnit_Framework_TestCase
 
         $result = $world->add();
 
-        $this->assertEquals($result, false);
+        $this->assertFalse($result);
     }
 
     public function testAddPersonObjectReturnTrue()
@@ -74,17 +52,16 @@ class WorldTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
-    public function testDispatchMudEventReturnTrue()
+    public function testAddNullReturnFalse()
     {
         $world = $this->_makeWorld();
-        $event = $this->_makeEvnet();
-        
-        $result = $world->dispatch('world.start', $event);
 
-        $this->assertTrue($result);
+        $result = $world->add(null);
+
+        $this->assertFalse($result);
     }
 
-    public function testDispatchMudEventReturnFalse()
+    public function testDispatchNullEventReturnFalse()
     {
         $world = $this->_makeWorld();
 
@@ -93,19 +70,4 @@ class WorldTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($result, false);
     }
 
-    public function testDispatchWorldUpdate()
-    {
-
-        $world = $this->_makeWorld();
-
-        $event = $this->_makeWorldRunEvent();
-
-        $person = $this->_makePerson();
-
-        $world->add($person);
-        
-        $result = $world->dispatch('world.run', $event);
-
-        $this->assertTrue($person->isRun());
-    }
 }

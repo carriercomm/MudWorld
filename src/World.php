@@ -3,17 +3,29 @@ namespace MudWorld;
 
 use MudWorld\Core\MudEvent;
 use MudWorld\Core\MudObject;
+use MudWorld\Core\WorldInterface;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class World
+class World implements WorldInterface
 {
     protected $dispatcher;
     protected $objs;
+    protected $log;
 
-    public function __construct(EventDispatcher $dispatcher)
+    public function __construct()
     {
-        $this->dispatcher = $dispatcher;
+        $this->dispatcher = new EventDispatcher;
+
+        // init the log instance
+    }
+
+    public function getLog()
+    {
+        return $this->log;
     }
 
     public function add(MudObject $obj = null)
@@ -31,20 +43,20 @@ class World
 
     public function addListener($event_name = null, $callback = null)
     {
-      if (is_null($event_name) or is_null($callback)) {
-        return false;
-      }
+        if (is_null($event_name) or is_null($callback)) {
+            return false;
+        }
 
-      $this->dispatcher->addListener($event_name, $callback);
+        $this->dispatcher->addListener($event_name, $callback);
 
-      return true;
+        return true;
 
     }
 
     public function addSubscriber(EventSubscriberInterface $subscriber)
     {
 
-      $this->dispatcher->addSubscriber($subscriber);
+        $this->dispatcher->addSubscriber($subscriber);
     }
 
     public function dispatch($event_name = null, MudEvent $event = null)
