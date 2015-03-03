@@ -9,7 +9,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "symfony/event-dispatcher": "~2.5"
+        "symfony/event-dispatcher": "~2.5",
+        "monolog/monolog": "~1.12@dev"
     },
     "autoload": {
         "psr-4": {
