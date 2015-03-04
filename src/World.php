@@ -21,6 +21,8 @@ class World implements WorldInterface
         $this->dispatcher = new EventDispatcher;
 
         // init the log instance
+        $this->log = new Logger('MudWorld');
+        $this->log->pushHandler(new StreamHandler('logs/dev.log'), Logger::DEBUG);
     }
 
     public function getLog()

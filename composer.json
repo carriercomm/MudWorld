@@ -15,9 +15,9 @@
     "autoload": {
         "psr-4": {
             "MudWorld\\": "src",
-            "MudWorld\\Core\\" : "src/core",
-            "MudWorld\\Event\\": "src/event",
-            "MudWorld\\Test\\": "test"
+            "MudWorld\\Core\\" : "src/cores",
+            "MudWorld\\Event\\": "src/events",
+            "MudWorld\\Test\\": "tests"
         }
     },
     "require-dev": {
