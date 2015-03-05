@@ -12,9 +12,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class World implements WorldInterface
 {
-    protected $dispatcher;
-    protected $objs;
-    protected $log;
+    protected $dispatcher = null;
+    protected $objs = array();
+    protected $log = null;
 
     public function __construct()
     {

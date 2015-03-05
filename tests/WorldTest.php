@@ -14,11 +14,6 @@ class WorldTest extends PHPUnit_Framework_TestCase
         return new World();
     }
 
-    private function _makeObject()
-    {
-        return new MudObject();
-    }
-
     private function _makePerson()
     {
         return new Person();
@@ -70,4 +65,12 @@ class WorldTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($result, false);
     }
 
+    public function testGetLogReturnLogger()
+    {
+        $world = $this->_makeWorld();
+
+        $log = $world->getLog();
+
+        $this->assertInstanceOf('Monolog\Logger', $log);
+    }
 }

@@ -13,4 +13,9 @@ abstract class MudEvent extends Event
     $this->world = $world;
   }
 
+  public function getWorld()
+  {
+    return $this->world;
+  }
+
 }
