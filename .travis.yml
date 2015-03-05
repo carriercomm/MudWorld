@@ -7,11 +7,11 @@ php:
   - hhvm
 
 before_install:
-    - sh -c "sudo mkdir vendor"
-    - sh -c "sudo mount -t tmpfs -o size=512M tmpfs vendor"
+  - sh -c "sudo mkdir vendor"
+  - sh -c "sudo mount -t tmpfs -o size=512M tmpfs vendor"
 
 install:
-    - composer install --prefer-source --no-interaction
+  - composer install --prefer-source --no-interaction
 
 script:
   - phpunit
