@@ -56,6 +56,27 @@ class WorldTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($result);
     }
 
+    public function testAddListenerReturnTrue()
+    {
+        $world = $this->_makeWorld();
+
+        $result = $world->addListener('world.init', function(){
+            return true;
+        });
+
+
+        $this->assertTrue($result);
+    }
+
+    public function testAddNullToListenerReturnFalse()
+    {
+        $world = $this->_makeWorld();
+
+        $result = $world->addListener(null);
+
+        $this->assertFalse($result);
+    }
+
     public function testDispatchNullEventReturnFalse()
     {
         $world = $this->_makeWorld();
