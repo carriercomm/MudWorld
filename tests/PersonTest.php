@@ -51,14 +51,11 @@ class PersonTest extends PHPUnit_Framework_TestCase
 
         $world = $this->_makeWorld();
 
-        $event = $this->_makeWorldInitEvent($world);
-
         $person = $this->_makePerson();
 
         $world->add($person);
 
-        $world->dispatch('world.init', $event);
-        $world->dispatch('world.after.init', $event);
+        $world->init();
 
         $this->assertTrue($person->isInit());
     }
@@ -68,14 +65,11 @@ class PersonTest extends PHPUnit_Framework_TestCase
 
         $world = $this->_makeWorld();
 
-        $event = $this->_makeWorldRunEvent($world);
-
         $person = $this->_makePerson();
 
         $world->add($person);
 
-        $world->dispatch('world.run', $event);
-        $world->dispatch('world.after.run', $event);
+        $world->run();
 
         $this->assertTrue($person->isRun());
     }
@@ -84,14 +78,11 @@ class PersonTest extends PHPUnit_Framework_TestCase
     {
         $world = $this->_makeWorld();
 
-        $event = $this->_makeWorldDestroyEvent($world);
-
         $person = $this->_makePerson();
 
         $world->add($person);
 
-        $world->dispatch('world.destroy', $event);
-        $world->dispatch('world.after.destroy', $event);
+        $world->destroy();
         
         $this->assertTrue($person->isDestroy());
     }

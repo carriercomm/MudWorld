@@ -72,7 +72,16 @@ class WorldTest extends PHPUnit_Framework_TestCase
     {
         $world = $this->_makeWorld();
 
-        $result = $world->addListener(null);
+        $result = $world->addListener('world.init', null);
+
+        $this->assertFalse($result);
+    }
+
+    public function testAddNonCallableToListenerReturnFalse()
+    {
+        $world = $this->_makeWorld();
+        
+        $result = $world->addListener('world.init', 'Null');
 
         $this->assertFalse($result);
     }

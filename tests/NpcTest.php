@@ -48,32 +48,26 @@ class NpcTest extends PHPUnit_Framework_TestCase
 
     public function testNpcInitReturnTrue()
     {
-
         $world = $this->_makeWorld();
-
-        $event = $this->_makeWorldInitEvent($world);
 
         $npc = $this->_makeNPC();
 
         $world->add($npc);
 
-        $result = $world->dispatch('world.init', $event);
+        $world->init();
 
         $this->assertTrue($npc->isInit());
     }
 
     public function testNpcRunReturnTrue()
     {
-
         $world = $this->_makeWorld();
-
-        $event = $this->_makeWorldRunEvent($world);
 
         $npc = $this->_makeNPC();
 
         $world->add($npc);
 
-        $result = $world->dispatch('world.run', $event);
+        $world->run();
 
         $this->assertTrue($npc->isRun());
     }
@@ -82,13 +76,11 @@ class NpcTest extends PHPUnit_Framework_TestCase
     {
         $world = $this->_makeWorld();
 
-        $event = $this->_makeWorldDestroyEvent($world);
-
         $npc = $this->_makeNPC();
 
         $world->add($npc);
 
-        $result = $world->dispatch('world.destroy', $event);
+        $world->destroy();
 
         $this->assertTrue($npc->isDestroy());
     }

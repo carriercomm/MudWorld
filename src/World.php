@@ -5,6 +5,10 @@ use MudWorld\Core\MudEvent;
 use MudWorld\Core\MudObject;
 use MudWorld\Core\WorldInterface;
 
+use MudWorld\Event\WorldInitEvent;
+use MudWorld\Event\WorldDestroyEvent;
+use MudWorld\Event\WorldRunEvent;
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -49,15 +53,18 @@ class World implements WorldInterface
             return false;
         }
 
+        if (false === is_callable($callback)) {
+            return false;
+        }
+
         $this->dispatcher->addListener($event_name, $callback);
 
         return true;
 
     }
 
-    public function addSubscriber(EventSubscriberInterface $subscriber)
+    public function addSubscriber(MudObject $subscriber)
     {
-
         $this->dispatcher->addSubscriber($subscriber);
     }
 
@@ -70,5 +77,29 @@ class World implements WorldInterface
         $this->dispatcher->dispatch($event_name, $event);
 
         return true;
+    }
+
+    public function init()
+    {
+        $event = new WorldInitEvent($this);
+
+        $this->dispatch('world.init', $event);
+        $this->dispatch('world.after.init', $event);
+    }
+
+    public function destroy()
+    {
+        $event = new WorldDestroyEvent($this);
+
+        $this->dispatch('world.destroy', $event);
+        $this->dispatch('world.after.destroy', $event);
+    }
+
+    public function run()
+    {
+        $event = new WorldRunEvent($this);
+
+        $this->dispatch('world.run', $event);
+        $this->dispatch('world.after.run', $event);
     }
 }

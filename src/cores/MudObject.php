@@ -10,7 +10,7 @@ abstract class MudObject implements EventSubscriberInterface
 {
 
     protected $was_init = false;
-    protected $was_destory = false;
+    protected $was_destroy = false;
     protected $was_run = false;
     protected $log = null;
 
